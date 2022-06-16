@@ -21,17 +21,17 @@ const CardForm = ({setFocused,focused}: ICardFormType) => {
     const onFocus = () => setFocused(true)
     const onBlur = () => setFocused(false)
     const cardName = watch('name')
-    const cardNumber = watch('card')
+    const cardNumber = watch('card')?.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim()
     const cardYear = watch('date.year.label')
     const cardMonth = watch('date.month.label')
     const cvv = watch('cvv')
-
+    console.log(cardNumber?.length)
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <BankCard
                 focused={focused}
-                cardNumber={cardNumber}
+                cardNumber={cardNumber as string}
                 cardName={cardName}
                 cardMonth={cardMonth}
                 cardYear={cardYear}

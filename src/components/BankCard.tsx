@@ -12,26 +12,23 @@ interface ICardType{
     cardYear:string;
     cvv:string;
 }
-const defaultNumber = 'XXXXXXXXXXXXXXXX'
+const defaultNumber = 'XXXX XXXX XXXX XXXX'
 const BankCard = ({focused,cardNumber,cardName,cardYear,cardMonth,cvv}:ICardType) => {
+
 
     const cardNumberChangeHandler = () =>{
         const strLeftPart = defaultNumber.slice(cardNumber?.length)     //
-        console.log(cardNumber?.length)
         if(!!cardNumber?.length){
-            return cardNumber?.length % 4 === 0
-                ? cardNumber.replace(/[^\dA-Z]/g, '')
-                .replace(/(.{4})/g, '$1 ') + strLeftPart
-                : cardNumber + strLeftPart
+            return cardNumber + strLeftPart
         }else{
-            return defaultNumber.replace(/[^\dA-Z]/g, '')
-                .replace(/(.{4})/g, '$1 ')
+            return defaultNumber
         }
     }
+
+
     useEffect(()=>{
         cardNumberChangeHandler()
     },[cardNumber])
-    console.log(cardNumber?.length)
     return (
         <Card className="m-5 bg-dark text-white border-0">
             <div className={s.flipBox}>
@@ -43,8 +40,8 @@ const BankCard = ({focused,cardNumber,cardName,cardYear,cardMonth,cvv}:ICardType
                         <Card.Title className={'text-end mt-1'}>VISA</Card.Title>
                         <Row>
                             <Col className={'mt-5 text-center'}>
-                                {cardNumber?.length===16
-                                    ?'*'.repeat(14) + cardNumberChangeHandler().slice(14)
+                                {cardNumber?.length===19
+                                    ?'**** '.repeat(3) + cardNumberChangeHandler().slice(15)
                                     :cardNumberChangeHandler()
                                 }
                             </Col>
