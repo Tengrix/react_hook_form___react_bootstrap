@@ -1,0 +1,22 @@
+.formMainWrapper {
+    background-color: rgba(210, 248, 247, 0.39);
+    border: 2px solid #157fc2;
+    border-radius: 25px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+.formBankCardWrapper{
+    margin: 60px 30px 0 0;
+}
+.formWrapper {
+    margin: 250px 10px 10px 10px;
+
+}
+.btnWrapper{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.sbmBtn {
+    margin: 10px 0 10px 0;
+}

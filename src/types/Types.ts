@@ -5,7 +5,7 @@ export type DateType = {
 
 export interface ICardType {
     name: string | null;
-    card: string | null;
+    card: number | null;
     date: {
         month: DateType,
         year: DateType

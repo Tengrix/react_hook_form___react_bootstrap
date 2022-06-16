@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import s from '../card.module.css';
+import React, {useMemo} from 'react';
+import s from './BankCard.module.css';
 import kaspi from '../assets/kaspi.png';
-import {Col, Row, Card} from 'react-bootstrap';
+import {Card, Col, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface ICardType{
@@ -15,34 +15,30 @@ interface ICardType{
 const defaultNumber = 'XXXX XXXX XXXX XXXX'
 const BankCard = ({focused,cardNumber,cardName,cardYear,cardMonth,cvv}:ICardType) => {
 
-
-    const cardNumberChangeHandler = () =>{
-        const strLeftPart = defaultNumber.slice(cardNumber?.length)     //
-        if(!!cardNumber?.length){
+    const cardNumberChangeHandler = useMemo(() =>{
+        console.log('aaaa')
+        const strLeftPart = defaultNumber.slice(cardNumber?.toString().length)     //
+        if(!!cardNumber?.toString().length){
             return cardNumber + strLeftPart
         }else{
             return defaultNumber
         }
-    }
-
-
-    useEffect(()=>{
-        cardNumberChangeHandler()
     },[cardNumber])
+
     return (
         <Card className="m-5 bg-dark text-white border-0">
-            <div className={s.flipBox}>
-                <div className={s.flipBoxInner}>
-                    <div className={s.flipBoxFront}>
-                        <Card.Img src={kaspi} alt="Paris" style={{width: 350, height: 250}}/>
+            <div className={s.card}>
+                <div className={focused ? [s.content,s.back].join(' ') :s.content}>
+                    <div className={s.front}>
+                        <Card.Img src={kaspi} alt="Paris" className={s.cardImg}/>
                     </div>
-                    <Card.ImgOverlay style={{width: 350, height: 250}}>
+                    <Card.ImgOverlay className={s.cardImg}>
                         <Card.Title className={'text-end mt-1'}>VISA</Card.Title>
                         <Row>
                             <Col className={'mt-5 text-center'}>
-                                {cardNumber?.length===19
-                                    ?'**** '.repeat(3) + cardNumberChangeHandler().slice(15)
-                                    :cardNumberChangeHandler()
+                                {cardNumber?.toString().length===19
+                                    ?'**** '.repeat(3) + cardNumberChangeHandler.slice(15)
+                                    :cardNumberChangeHandler
                                 }
                             </Col>
                         </Row>
@@ -71,14 +67,11 @@ const BankCard = ({focused,cardNumber,cardName,cardYear,cardMonth,cvv}:ICardType
                             </Col>
                         </Row>
                     </Card.ImgOverlay>
-                    <div className={s.flipBoxBack }>
+                    <div className={s.back }>
                         <img src={kaspi} alt="Paris" style={{width: 350, height: 250}}/>
                         <Card.ImgOverlay className={'text-start'}>
                             <Row>
-                                <Col style={{marginTop:100}}>CVV</Col>
-                            </Row>
-                            <Row>
-                                <Col>{cvv}</Col>
+                                <Col>CVV {cvv}</Col>
                             </Row>
                         </Card.ImgOverlay>
                     </div>

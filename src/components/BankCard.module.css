@@ -1,0 +1,50 @@
+.cardImg {
+    width: 350px;
+    height: 250px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 350px;
+    height: 250px;
+    margin: -150px;
+
+}
+
+.content {
+    position: relative;
+    margin-top: 100px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+
+.card:active .content {
+    transform: rotateY( 180deg ) ;
+}
+
+.front,
+.back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    line-height: 200px;
+    color: #03446A;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 5px;
+    backface-visibility: hidden;
+}
+
+.back {
+    background: #03446A;
+    color: white;
+    transform: rotateY( 180deg );
+}
